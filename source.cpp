@@ -63,3 +63,39 @@ void BST::insert(string word) {
 		}
 	}
 }
+
+void BST :: inorder(tnode* rot) {
+
+	if (rot == NULL) {
+		return;
+	}
+	else {
+		inorder(rot->left);
+		cout << rot->word << "  ";
+		inorder(rot->right);
+	}
+}
+
+bool BST::search(string word) {
+	tnode* temp;
+	temp = root;
+	if (temp == NULL) {
+		return 0;
+	}
+	else {
+		while (temp!= NULL) {
+			if (word.compare(temp->word) > 0) {
+				temp = temp->right;
+			}
+			else if (word.compare(temp->word) == 0 ) {
+				//cout << word << " is found" << endl;
+				return true;
+			}
+			else if (word.compare(temp->word) < 0 ) {
+				temp = temp->left;
+			}
+		}
+		//cout << word << " is not found" << endl;
+	}
+	return false;
+}
