@@ -99,3 +99,69 @@ bool BST::search(string word) {
 	}
 	return false;
 }
+
+
+class spellCorrector {
+public:
+	string refinedForm(string word);
+	string missingCase(BST tree,string word);
+	string extraCase(BST tree,string word);
+	string misplacedCase(BST tree, string word);
+};
+
+string spellCorrector :: refinedForm(string word) {
+
+	int length = word.length();
+
+	int k = length;
+	int l = length;
+	int m = length;
+	int g = length;
+	int h = length;
+
+	if (word[--k] == 's' && word[--k] == 'e' && word[--k] == 'i') {
+		word.erase(k, length);
+		word.append(1, 'y');
+		return word;
+	}
+	else if (word[--l] == 'g' && word[--l] == 'n' && word[--l] == 'i') {
+		word.erase(l, length);
+		word.append(1, 'e');
+		return word;
+	}
+	else if ((word[--m] == 's' || word[m] == 'y' || word[m] == 'd') && (word[--m] == 'e' || word[m] == 'l' || word[m] == 'd')) {
+		word.erase(m, length);
+		return word;
+	}
+	else if ((word[--g] == 's' || word[g] == 'd') && (word[--g] == 'e')) {
+		word.erase(length);
+		return word;
+	}
+	else if (word[--h] == 's') {
+		word.erase(h);
+		return word;
+	}
+	return word;
+}
+
+string spellCorrector :: missingCase(BST tree, string word) {
+
+	int len = word.length() + 1;
+	char alpha[] = { 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z' };
+
+	for (int i = 0; i < len; i++) {
+		word.insert(i, 1, 'a');
+		for (int j = 0; j < 26; j++) {
+			word[i] = alpha[j];
+			if (tree.search(word)) {
+				cout << word << " is found missing case" << endl;
+				return word;
+			}
+			else {
+				continue;
+			}
+		}
+		word.erase(i, 1);
+	}
+	return "";
+}
