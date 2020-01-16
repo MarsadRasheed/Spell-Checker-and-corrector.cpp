@@ -165,3 +165,43 @@ string spellCorrector :: missingCase(BST tree, string word) {
 	}
 	return "";
 }
+
+
+string spellCorrector :: extraCase(BST tree,string word) {
+	
+	int lengthofWord = word.length();
+
+	for (int j = 0; j < lengthofWord; j++) {
+		string test = word;
+		test.erase(j, 1);
+		if (tree.search(test)) {
+			cout << "you're trying to search the word :  " << test << endl;
+			return test;
+		}
+	}
+	return "";
+}
+
+string spellCorrector :: misplacedCase(BST tree, string word) {
+
+	int length = word.length();
+	char temp;
+
+	for (int i = 0; i < length; i++) {
+		string tem = word;
+		for (int j = 0; j < length; j++) {
+			temp = word[i];
+			word[i] = word[j];
+			word[j] = temp;
+			if (tree.search(word)) {
+				cout << "word found " << word;
+				return word;
+			}
+			else {
+				word = tem;
+			}
+		}
+		word = tem;
+	}
+	return "";
+}
