@@ -205,3 +205,30 @@ string spellCorrector :: misplacedCase(BST tree, string word) {
 	}
 	return "";
 }
+
+
+int hemmingDistance(string a, string b) {
+	int i = 0;
+	int count = 0;
+	while (a[i] != '\0' && b[i] != '\0' ) {
+		if (a[i] != b[i]) {
+			count++;
+		}
+		i++;
+	}
+	return count;
+}
+
+void loadDictionary(BST tree) {
+	int count=0;
+	string test = "";
+	ifstream fin;
+	fin.open("dictionary.txt");
+	while (!fin.eof()) {
+		count++;
+		getline(fin, test);
+		tree.insert(test);
+		cout << count << " --> " << test << " inserting in tree " << endl;
+	}
+	fin.close();
+}
