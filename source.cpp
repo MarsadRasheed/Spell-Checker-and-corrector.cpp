@@ -232,3 +232,10 @@ void loadDictionary(BST tree) {
 	}
 	fin.close();
 }
+
+int main(){
+	
+	BST tree;
+	spellCorrector corrector;
+
+}
